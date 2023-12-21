@@ -1,0 +1,123 @@
+.navbar {
+  background-color: var(--light-slate);
+  padding: 3px;
+  height: 40px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: sticky;
+  top: 0;
+  border-bottom: 2px solid #efefef;
+  z-index: 10;
+
+  .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 40px;
+    width: 100%;
+
+    .menu {
+      height: 40px;
+      list-style: none;
+      display: flex;
+      align-items: center;
+      position: relative;
+
+      .links {
+        color: black;
+        display: flex;
+        align-items: center;
+        text-decoration: none;
+        padding: 5.5px 8px 5.5px 8px;
+        cursor: pointer;
+      }
+    }
+  }
+}
+
+
+.nav-menu {
+  /* display: grid; */
+  /* grid-template-columns: repeat(4, auto); */
+  /* grid-gap: 10px; */
+  list-style: none;
+  text-align: center;
+  width: 60vw;
+  /* justify-content: end; */
+  /* margin-right: 2rem; */
+}
+
+.nav-item {
+  height: 40px;
+  list-style: none;
+  display: flex;
+  align-items: center;
+  position: relative;
+
+  img {
+    height: 10px;
+    width: 10px;
+    color: #fff;
+    margin-right: 5px;
+  }
+}
+
+.nav-links {
+  color: black;
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  padding: 5.5px 8px 5.5px 8px;
+  border-top: 2px solid white;
+  border-right: 2px solid #5b5b5b;
+  border-bottom: 2px solid #5b5b5b;
+  border-left: 2px solid white;
+  position: relative;
+
+  /* box-shadow: 1.5px 1.5px 3px rgba(0, 0, 0, 0.5), 1px 1px 3px #ffff inset; */
+  .img> :nth-child(1) {
+    height: 10px !important;
+    width: 10px !important;
+    color: #fff;
+    margin-right: 5px;
+    position: relative;
+  }
+}
+
+.nav-links img> :nth-child(1) {
+  height: 10px !important;
+  width: 10px !important;
+  color: #fff;
+  margin-right: 5px;
+}
+
+.nav-hover {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  padding: 5.5px 8px 5.5px 8px;
+  color: white;
+  border-bottom: 2px solid white;
+  border-left: 2px solid #5b5b5b;
+  border-top: 2px solid #5b5b5b;
+  border-right: 2px solid white;
+  cursor: pointer;
+
+  /* box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.3) inset, -1px -1px 4px #ffff inset; */
+  img {
+    height: 10px;
+    width: 10px;
+    color: #fff;
+    margin-right: 5px;
+  }
+}
+
+.nav-links-mobile {
+  display: none;
+}
+
+.menu-icon {
+  display: none;
+}
