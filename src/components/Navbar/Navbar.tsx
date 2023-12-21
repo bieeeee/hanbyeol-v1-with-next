@@ -22,9 +22,9 @@ const Navbar = () => {
     <nav className={styles.navbar}>
       <div className={styles.container}>
         <div className={styles.menu} onMouseEnter={onMouseEnter} onMouseLeave={onMouseLeave} onClick={onClick}>
-          <div className={dropdown ?`${styles.links} clickedButton`: `${styles.links} button`}>
+          <div className={dropdown ?`${styles.links} clickedBorder`: `${styles.links} border`}>
             <Image src={logo} alt="logo" width={19} height={19} priority={true} />
-            <span>Start</span>
+            Start
           </div>
           {dropdown && <Dropdown />}
         </div>

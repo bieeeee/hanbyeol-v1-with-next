@@ -1,16 +1,16 @@
 export const MenuItems = [
   {
-    title: 'navbar.about',
+    title: 'About',
     id: 'about',
     cName: 'dropdown-link'
   },
   {
-    title: 'navbar.projects',
+    title: 'Projects',
     id: 'projects',
     cName: 'dropdown-link'
   },
   {
-    title: 'navbar.contact',
+    title: 'Contact',
     id: 'contact',
     cName: 'dropdown-link'
   }

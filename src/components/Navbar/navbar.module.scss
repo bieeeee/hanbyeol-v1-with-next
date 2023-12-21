@@ -28,7 +28,9 @@
       .links {
         color: black;
         display: flex;
+        gap: 5px;
         align-items: center;
+        justify-content: center;
         text-decoration: none;
         padding: 5.5px 8px 5.5px 8px;
         cursor: pointer;
@@ -39,14 +41,9 @@
 
 
 .nav-menu {
-  /* display: grid; */
-  /* grid-template-columns: repeat(4, auto); */
-  /* grid-gap: 10px; */
   list-style: none;
   text-align: center;
   width: 60vw;
-  /* justify-content: end; */
-  /* margin-right: 2rem; */
 }
 
 .nav-item {
