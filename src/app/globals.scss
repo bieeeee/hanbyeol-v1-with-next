@@ -25,8 +25,8 @@
   --light-slate: #c0c0c0;
   --dark-navy: #000184;
 
-  --button-border: 2px solid #5b5b5b;
-  --button-border-highlight: 2px solid white;
+  --border: 2px solid #5b5b5b;
+  --border-highlight: 2px solid white;
 }
 
 * {
@@ -51,16 +51,20 @@ a {
   text-decoration: none;
 }
 
-.button {
-  border-top: var(--button-border-highlight);
-  border-right: var(--button-border);
-  border-bottom: var(--button-border);
-  border-left: var(--button-border-highlight);
+ul {
+  list-style: none;
 }
 
-.clickedButton {
-  border-top: var(--button-border);
-  border-right: var(--button-border-highlight);
-  border-bottom: var(--button-border-highlight);
-  border-left: var(--button-border);
+.border {
+  border-top: var(--border-highlight);
+  border-right: var(--border);
+  border-bottom: var(--border);
+  border-left: var(--border-highlight);
+}
+
+.clickedBorder {
+  border-top: var(--border);
+  border-right: var(--border-highlight);
+  border-bottom: var(--border-highlight);
+  border-left: var(--border);
 }
