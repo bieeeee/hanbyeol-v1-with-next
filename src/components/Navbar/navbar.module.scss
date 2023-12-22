@@ -12,27 +12,24 @@
   z-index: 10;
 
   .container {
+    height: 40px;
+    width: 100%;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    height: 40px;
-    width: 100%;
 
     .menu {
       height: 40px;
-      list-style: none;
       display: flex;
       align-items: center;
       position: relative;
 
       .links {
-        color: black;
         display: flex;
         gap: 5px;
         align-items: center;
         justify-content: center;
-        text-decoration: none;
-        padding: 5.5px 8px 5.5px 8px;
+        padding: 4.5px 7.5px 4.5px 7.5px;
         cursor: pointer;
       }
     }
