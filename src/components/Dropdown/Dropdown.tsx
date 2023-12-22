@@ -2,19 +2,11 @@
 import { useState } from 'react';
 import { MenuItems } from './MenuItem';
 import styles from './dropdown.module.scss';
+import Link from 'next/link';
 
 function Dropdown() {
   const [click, setClick] = useState(false);
   const handleClick = () => setClick(!click);
-  const smoothScrollToSection = (sectionId: string) => {
-    const section = document.getElementById(sectionId);
-    if (section) {
-      section.scrollIntoView({
-        behavior: 'smooth',
-        block: 'start',
-      });
-    }
-  };
 
   return (
     <ul
@@ -23,17 +15,13 @@ function Dropdown() {
     >
       {MenuItems.map((item, index) => {
         return (
-          <li key={index} className={styles.li}>
-            <span
-              className={styles.link}
-              onClick={() => {
-                smoothScrollToSection(item.id);
-                setClick(false);
-              }}
-            >
-              {item.title}
-            </span>
-          </li>
+          <Link href={item.path} key={index}>
+            <li className={styles.li} onClick={() => setClick(false)}>
+              <span className={styles.link}>
+                {item.title}
+              </span>
+            </li>
+          </Link>
         );
       })}
     </ul>
