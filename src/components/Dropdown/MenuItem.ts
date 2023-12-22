@@ -2,16 +2,16 @@ export const MenuItems = [
   {
     title: 'About',
     id: 'about',
-    cName: 'dropdown-link'
+    path: '/'
   },
   {
     title: 'Projects',
     id: 'projects',
-    cName: 'dropdown-link'
+    path: '/projects'
   },
   {
     title: 'Contact',
     id: 'contact',
-    cName: 'dropdown-link'
+    path: 'mailto:janviertrois@naver.com'
   }
 ];
