@@ -10,17 +10,15 @@ import { folder } from '@images'
 export default function Home() {
   return (
     <main className={styles.main}>
-      <div className={styles.container}>
-        <Terminal />
-        <div className={styles.icons}>
-          <Skill>
-            <SkillItems />
-          </Skill>
-          <Link href="/projects" className='folder'>
-            <Image src={folder} width={48} height={48} alt='projects-folder' />
-            Projects
-          </Link>
-        </div>
+      <Terminal />
+      <div className={styles.icons}>
+        <Skill>
+          <SkillItems />
+        </Skill>
+        <Link href="/projects" className='folder'>
+          <Image src={folder} width={48} height={48} alt='projects-folder' />
+          Projects
+        </Link>
       </div>
     </main>
   )
