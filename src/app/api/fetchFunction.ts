@@ -1,4 +1,4 @@
-export const basicFetch = async <returnType>(endpoint: string): Promise<ReturnType> => {
+export const basicFetch = async <returnType>(endpoint: string): Promise<returnType> => {
   const response = await fetch(endpoint);
 
   if (!response.ok) throw new Error('Error occured');
