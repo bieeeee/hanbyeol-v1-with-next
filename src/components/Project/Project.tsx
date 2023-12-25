@@ -6,12 +6,12 @@ import { close, folder, openFolder } from "@images";
 
 
 const Project = ({ projects }: { projects: Project[] }) => {
+  const [selectedId, setSelectedId] = useState<number>(-1);
   const [isSelected, setIsSelcted] = useState<boolean>(false);
-  const [selectedId, setSelectedId] = useState<number>();
 
   const toggleProjectItem = (id: number) => {
-    setIsSelcted(!isSelected);
     setSelectedId(id - 1);
+    setIsSelcted(!isSelected);
   };
 
   return (
@@ -21,7 +21,7 @@ const Project = ({ projects }: { projects: Project[] }) => {
           <div className="modal-bar-left">
             <Image src={openFolder} width={12} height={12} alt="folder-opened" priority />
             <p>
-              {isSelected && selectedId ?
+              {isSelected ?
                 projects[selectedId].title
                 :
                 "Projects"
