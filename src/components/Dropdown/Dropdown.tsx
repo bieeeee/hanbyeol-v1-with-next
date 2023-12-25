@@ -15,7 +15,7 @@ function Dropdown() {
     >
       {MenuItems.map((item, index) => {
         return (
-          <Link href={item.path} key={index}>
+          <Link href={item.path} key={index} replace>
             <li className={styles.li} onClick={() => setClick(false)}>
               <span className={styles.link}>
                 {item.title}
