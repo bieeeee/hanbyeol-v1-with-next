@@ -1,4 +1,4 @@
-export const basicFetch = async <returnType>(endpoint: string, customHeaders?: Record<string, string>): Promise<returnType> => {
+export const basicFetch = async <returnType>(endpoint: string, customHeaders?: Record<string, string|boolean>): Promise<returnType> => {
   const defaultHeaders = {};
   const headers = customHeaders ? {...defaultHeaders, ...customHeaders} : defaultHeaders;
   const response = await fetch(endpoint, {
