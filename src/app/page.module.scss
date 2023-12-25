@@ -18,3 +18,8 @@
     padding: 20px;
   }
 }
+
+.projectMain {
+  @extend .main;
+  gap: 0;
+}
