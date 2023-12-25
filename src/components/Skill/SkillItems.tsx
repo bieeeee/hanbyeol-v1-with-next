@@ -2,12 +2,6 @@ import Image from "next/image";
 import { basicFetch } from "@/app/api/fetchFunction";
 import { skillUrl } from "../../../config";
 
-interface Skill {
-  id: number;
-  title: string;
-  img: string;
-}
-
 const SkillItems = async () => {
   const skills = await basicFetch<Skill[]>(skillUrl);
 
