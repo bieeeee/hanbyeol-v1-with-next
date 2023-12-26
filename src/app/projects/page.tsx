@@ -1,10 +1,10 @@
 import styles from '../page.module.scss';
 import Project from '@/components/Project/Project';
 import { basicFetch } from '../api/fetchFunction';
-import { projectKey, projectUrl } from '../../../config';
 
 export default async function Home() {
-  const projects = await basicFetch<Project[]>(projectUrl, projectKey);
+  const projectKey = {"X-MASTER-KEY": process.env.PROJECT_KEY,"X-Bin-Meta": false}
+  const projects = await basicFetch<Project[]>(process.env.PROJECT_URL, projectKey);
 
   return (
     <main className={styles.projectMain}>

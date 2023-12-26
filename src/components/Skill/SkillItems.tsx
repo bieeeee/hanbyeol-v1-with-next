@@ -1,9 +1,8 @@
 import Image from "next/image";
 import { basicFetch } from "@/app/api/fetchFunction";
-import { skillUrl } from "../../../config";
 
 const SkillItems = async () => {
-  const skills = await basicFetch<Skill[]>(skillUrl);
+  const skills = await basicFetch<Skill[]>(process.env.SKILL_URL);
 
   return (
     <div className="modal-content modal-skill">
