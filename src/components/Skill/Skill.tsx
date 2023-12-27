@@ -1,6 +1,7 @@
 'use client'
-import { close, folder, openFolder } from '@images';
+import styles from './Skill.module.scss';
 import Image from 'next/image';
+import { close, folder, openFolder } from '@images';
 import { useState } from 'react';
 
 interface SkillLoaderProps {
@@ -23,9 +24,9 @@ const Skill = ({children}: SkillLoaderProps) => {
       {skillModal && (
         <div className='modal'>
           <div className='overlay'>
-            <div className='modal-container'>
-              <div className="modal-bar">
-                <div className="modal-bar-left">
+            <div className={`${styles.skillContainer} border`}>
+              <div className="modalBar">
+                <div className="modalBarLeft">
                   <Image src={openFolder} alt='open-folder-icon' />
                   <p>Skills</p>
                 </div>

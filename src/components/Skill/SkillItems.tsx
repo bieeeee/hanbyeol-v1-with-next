@@ -5,7 +5,7 @@ const SkillItems = async () => {
   const skills = await basicFetch<Skill[]>(process.env.SKILL_URL);
 
   return (
-    <div className="modal-content modal-skill">
+    <div className="modal-content">
       {skills.map((skill: Skill) => (
         <div key={skill.id} className="folder">
           <Image src={skill.img} width={43} height={43} alt={skill.title} />
