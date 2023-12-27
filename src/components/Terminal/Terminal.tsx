@@ -8,8 +8,8 @@ function Terminal() {
   return (
     <div className={styles.terminal} id='about'>
       <div className={`${styles.container} border`}>
-        <div className="modal-bar">
-          <div className="modal-bar-left">
+        <div className="modalBar">
+          <div className="modalBarLeft">
             <Image src={prompt} alt='prompt' />
             About Me
           </div>
