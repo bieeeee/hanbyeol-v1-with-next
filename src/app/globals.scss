@@ -1,26 +1,5 @@
 :root {
-  --max-width: 1100px;
-  --border-radius: 12px;
-  --font-mono: ui-monospace, Menlo, Monaco, 'Cascadia Mono', 'Segoe UI Mono',
-    'Roboto Mono', 'Oxygen Mono', 'Ubuntu Monospace', 'Source Code Pro',
-    'Fira Mono', 'Droid Sans Mono', 'Courier New', monospace;
-
-  --foreground-rgb: 0, 0, 0;
-  --background-start-rgb: 214, 219, 220;
-  --background-end-rgb: 255, 255, 255;
-
-  --primary-glow: conic-gradient(
-    from 180deg at 50% 50%,
-    #16abff33 0deg,
-    #0885ff33 55deg,
-    #54d6ff33 120deg,
-    #0071ff33 160deg,
-    transparent 360deg
-  );
-  --secondary-glow: radial-gradient(
-    rgba(255, 255, 255, 1),
-    rgba(255, 255, 255, 0)
-  );
+  --max-width: 1024px;
 
   --light-slate: #d4d4d4;
   --dark-navy: #000184;
@@ -73,7 +52,7 @@ ul {
   border-left: var(--border);
 }
 
-.modal, .overlay {
+.modal {
   width: 100%;
   height: 100vh;
   top: 0;
@@ -81,31 +60,15 @@ ul {
   right: 0;
   bottom: 0;
   position: fixed;
+
+  .overlay {
+    @extend .modal;
+    background: rgba(49, 49, 49, 0.8);
+  }
 }
 
-.overlay {
-  background: rgba(49,49,49,0.8);
-}
-.modal-container {
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  /* line-height: 1.4; */
-  max-width: 600px;
-  min-width: 300px;
-  /* width: 80%; */
-  height: fit-content;
-  /* margin: 0 auto; */
-  padding: 5px 5px 5px 5px;
-  background-color: #d4d4d4;
-  border-top: 2px solid white;
-  border-right: 2px solid #464545;
-  border-bottom: 2px solid #464545;
-  border-left: 2px solid white;
-}
 
-.modal-bar {
+.modalBar {
   display: flex;
   justify-content: space-between;
   background-color: blue;
@@ -116,7 +79,7 @@ ul {
   padding-left: 3px;
   font-size: 19px;
 
-  .modal-bar-left {
+  .modalBarLeft {
     display: flex;
     justify-content: left;
     align-items: center;
@@ -129,55 +92,46 @@ ul {
       margin-right: 3px;
     }
   }
+
+  .close-modal {
+    @extend .border;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-right: 3px;
+    padding: 2.5px;
+  }
+
+  .close-modal:active:enabled {
+    @extend .clickedBorder;
+  }
+
+  .close-modal:disabled {
+    cursor: not-allowed;
+  }
 }
+
 
 .modal-content {
-  height: fit-content;
-  border: 1px solid black;
-  background-color: white;
-  color: black;
-  padding: 22px 16px 16px 16px;
-  border-bottom: 2px solid white;
-  border-left: 2px solid #5b5b5b;
-  border-top: 2px solid #5b5b5b;
-  border-right: 2px solid white;
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  grid-gap: 25px;
-}
-
-.modal-content-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  grid-gap: 15px;
-  text-align: center;
-  justify-items: center;
-}
-
-.modal-content-grid img {
-  height: 43px;
-}
-
-.modal-content-grid p {
-  margin: 0;
-}
-
-.close-modal {
-  @extend .border;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin-right: 3px;
-  padding: 2.5px;
-}
-
-.close-modal:active {
   @extend .clickedBorder;
+  width: 100%;
+  height: 100%;
+  padding: 10px;
+  background-color: white;
 }
+
+
 
 .folder {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  white-space: nowrap;
+}
+
+.flex {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
