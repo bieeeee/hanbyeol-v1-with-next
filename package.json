@@ -12,6 +12,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@react-icons/all-files": "^4.1.0",
     "i18next": "^23.7.11",
     "next": "14.0.4",
     "next-i18next": "^15.1.1",
