@@ -18,12 +18,6 @@ const nextConfig = {
       },
     ],
   },
-  env: {
-    SKILL_URL: process.env.SKILL_URL,
-    PROJECT_URL: process.env.PROJECT_URL,
-    PROJECT_KEY: process.env.PROJECT_KEY,
-    NEXT_PUBLIC_CLOUD_NAME: process.env.NEXT_PUBLIC_CLOUD_NAME,
-  }
 }
 
 module.exports = nextConfig
