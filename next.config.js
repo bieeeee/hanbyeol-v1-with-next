@@ -3,7 +3,20 @@
 const nextConfig = {
   reactStrictMode: true,
   images: {
-    domains: ['github.com'],
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'github.com',
+        port: '',
+        pathname: '/bieeeee/**',
+      },
+      {
+        protocol: 'https',
+        hostname: '**.cloudinary.com',
+        port: '',
+        pathname: `/${process.env.NEXT_PUBLIC_CLOUD_NAME}/image/upload/**`,
+      },
+    ],
   },
 }
 
