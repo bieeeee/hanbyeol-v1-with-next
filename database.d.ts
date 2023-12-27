@@ -3,6 +3,7 @@ interface Project {
   title: string;
   desc: string;
   stack: Array<string>;
+  image: string;
 }
 
 interface Skill {
