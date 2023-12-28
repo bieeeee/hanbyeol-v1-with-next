@@ -1,7 +1,7 @@
 module.exports = {
   apps: [{
     script: 'npm start',
-    env: {
+    env_production: {
       NODE_ENV: "production"
     }
   }],
