@@ -2,7 +2,6 @@
 
 const nextConfig = {
   reactStrictMode: true,
-  transpilePackages: ['@mui/x-charts'],
   images: {
     remotePatterns: [
       {

@@ -12,8 +12,8 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "@mui/x-charts": "^6.18.4",
     "@react-icons/all-files": "^4.1.0",
+    "chart.js": "^4.4.1",
     "i18next": "^23.7.11",
     "next": "14.0.4",
     "next-i18next": "^15.1.1",
