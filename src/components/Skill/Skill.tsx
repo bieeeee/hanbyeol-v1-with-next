@@ -3,12 +3,12 @@ import styles from './Skill.module.scss';
 import Image from 'next/image';
 import { close, folder, openFolder } from '@images';
 import { useState } from 'react';
+import { Chart as ChartJS, ArcElement, Tooltip, Legend, Colors } from "chart.js";
+import { Doughnut } from "react-chartjs-2";
 
-interface SkillLoaderProps {
-  children: React.ReactNode
-}
+ChartJS.register(ArcElement, Tooltip, Legend, Colors);
 
-const Skill = ({children}: SkillLoaderProps) => {
+const Skill = ({ data }: any) => {
   const [skillModal, setSkillModal] = useState(false);
 
   const toggleModal = () => {
@@ -22,9 +22,9 @@ const Skill = ({children}: SkillLoaderProps) => {
         <p>Skills</p>
       </div>
       {skillModal && (
-        <div className='modal'>
-          <div className='overlay'>
-            <div className={`${styles.skillContainer} border`}>
+        <div className={styles.modal}>
+          <div className={styles.overlay}>
+            <div className={`${styles.skillContainer} folderContainer`}>
               <div className="modalBar">
                 <div className="modalBarLeft">
                   <Image src={openFolder} alt='open-folder-icon' />
@@ -34,7 +34,9 @@ const Skill = ({children}: SkillLoaderProps) => {
                   <Image src={close} width={12} height={12} alt='close-button' />
                 </div>
               </div>
-              {children}
+              <div className="modal-content">
+                <Doughnut data={data} />
+              </div>
             </div>
           </div>
         </div>)
