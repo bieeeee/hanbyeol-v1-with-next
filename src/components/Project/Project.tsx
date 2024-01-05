@@ -21,7 +21,7 @@ const Project = ({ projects }: { projects: Project[] }) => {
 
   return (
     <>
-      <div className={`${styles.projectContainer} border`}>
+      <div className="folderContainer">
         <div className="modalBar">
           <div className="modalBarLeft">
             <Image src={openFolder} width={12} height={12} alt="folder-opened" priority />
@@ -39,7 +39,7 @@ const Project = ({ projects }: { projects: Project[] }) => {
         </div>
         <div className='modal-content'>
           {!isSelected ? (
-            <div className={styles.projectList}>
+            <div className="folderGrid">
               {projects.map((project: Project) => (
                 <div
                   key={project.id}
