@@ -1,9 +1,9 @@
 import type { Metadata } from 'next'
-import { Fira_Code } from 'next/font/google'
+import { IBM_Plex_Sans_KR } from 'next/font/google'
 import './globals.scss'
 import Navbar from '@/components/Navbar/Navbar'
 
-const fira = Fira_Code({ subsets: ['latin'] })
+const ibm = IBM_Plex_Sans_KR({ subsets: ['latin'], weight: ["100", "200", "300", "400"] })
 
 export const metadata: Metadata = {
   title: 'Create Next App',
@@ -17,7 +17,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={fira.className}>
+      <body className={ibm.className}>
         <Navbar />
         {children}
       </body>
