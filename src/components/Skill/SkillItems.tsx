@@ -1,18 +1,29 @@
-import Image from "next/image";
 import { basicFetch } from "@/app/api/fetchFunction";
+import Skill from "./Skill";
 
 const SkillItems = async () => {
-  const skills = await basicFetch<Skill[]>(process.env.SKILL_URL);
+  const projectKey = { "X-MASTER-KEY": process.env.PROJECT_KEY, "X-Bin-Meta": false };
+  const projects = await basicFetch<Project[]>(process.env.PROJECT_URL, projectKey);
+  const skills: Skills = projects.reduce((acc: Skills, cur: Project) => {
+    cur.stack.forEach((skill) => acc[skill] = (acc[skill] || 0) + 1)
+    return acc
+  }, {});
+
+  const sortedSkills = Object.entries(skills).sort((a, b) => b[1] - a[1])
+  const skillData = Object.fromEntries(sortedSkills)
+
+  const data = {
+    labels: Object.keys(skillData),
+    datasets: [
+      {
+        data: Object.values(skillData),
+        hoverOffset: 4
+      }
+    ]
+  }
 
   return (
-    <div className="modal-content">
-      {skills.map((skill: Skill) => (
-        <div key={skill.id} className="folder">
-          <Image src={skill.img} width={43} height={43} alt={skill.title} />
-          {skill.title}
-        </div>
-      ))}
-    </div>
+    <Skill data={data} />
   )
 }
 
