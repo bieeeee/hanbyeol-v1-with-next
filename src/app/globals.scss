@@ -1,5 +1,5 @@
 $xl: 87.5em; // 4k and hi-res desktop
-$lg: 60em; // 1080 and hi-res laptops
+$lg: 64em; // 1080 and hi-res laptops
 $med: 40em; // hi-res tablets and low-res laptops
 $sm: 28em; // mobile and low-res tablets
 $xs: 20em; // mobile only
@@ -73,9 +73,9 @@ ul {
 
 .folderContainer {
   @extend .border;
-  max-width: 1024px;
+  max-width: 70vw;
   width: 100%;
-  height: 70vh;
+  height: 80vh;
   margin: 0 auto;
   padding: 5px;
   display: flex;
@@ -88,6 +88,18 @@ ul {
   grid-template-columns: repeat(5, 1fr);
   justify-items: center;
   align-items: center;
+
+  @media (max-width: $lg) {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  @media (max-width: $med) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  @media (max-width: $sm) {
+    grid-template-columns: repeat(1, 1fr);
+  }
 }
 
 
@@ -137,7 +149,7 @@ ul {
 .modal-content {
   @extend .clickedBorder;
   width: 100%;
-  height: calc(70vh - 45px);
+  height: calc(80vh - 45px);
   padding: 10px;
   background-color: white;
 }
