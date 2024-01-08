@@ -9,7 +9,7 @@ import ChartDataLabels from 'chartjs-plugin-datalabels';
 
 ChartJS.register(ArcElement, ChartDataLabels, Tooltip, Legend, Colors);
 
-const options = {
+const options: any = {
   plugins: {
     legend: {
       display: false
@@ -29,14 +29,13 @@ const options = {
     },
     tooltip: {
       callbacks: {
-        title: function(context) {
+        title: function(context: any) {
           return context[0].dataset.labels[context[0].dataIndex];
         }
       }
     }
   }
 }
-
 
 const Skill = ({ data }: any) => {
   const [skillModal, setSkillModal] = useState(false);
@@ -66,7 +65,7 @@ const Skill = ({ data }: any) => {
               </div>
               <div className="modal-content">
                 <div className={styles.chart}>
-                  <Doughnut data={data} plugins={[ChartDataLabels]} options={options} />
+                  <Doughnut data={data} options={options} />
                 </div>
               </div>
             </div>
