@@ -5,10 +5,11 @@ import { useState } from "react";
 import { close, folder, openFolder } from "@images";
 import { BsFillPeopleFill } from "@react-icons/all-files/bs/BsFillPeopleFill";
 import { FaRegCalendarAlt } from "@react-icons/all-files/fa/FaRegCalendarAlt";
-import { FaCode } from "@react-icons/all-files/fa/FaCode";
+import { useRouter } from 'next/navigation';
 
 
 const Project = ({ projects }: { projects: Project[] }) => {
+  const router = useRouter();
   const [selectedId, setSelectedId] = useState<number>(-1);
   const [isSelected, setIsSelcted] = useState<boolean>(false);
   const selectedProject = projects[selectedId];
@@ -33,7 +34,16 @@ const Project = ({ projects }: { projects: Project[] }) => {
               }
             </p>
           </div>
-          <button className="close-modal" disabled={!isSelected} onClick={() => toggleProjectItem(0)}>
+          <button
+            className="close-modal"
+            onClick={() => {
+              if (selectedId === -1) {
+                router.back()
+              } else {
+                toggleProjectItem(0)
+              }
+            }}
+          >
             <Image src={close} width={12} height={12} alt="folder-opened" />
           </button>
         </div>
@@ -55,7 +65,7 @@ const Project = ({ projects }: { projects: Project[] }) => {
             <div className={styles.projectContent}>
               <div className={styles.projectInfo}>
                 <div className={styles.projectImg}>
-                  <Image src={image} fill style={{ objectFit: "cover" }} alt={selectedProject.title} />
+                  <Image src={image} fill alt={selectedProject.title} />
                 </div>
                 <div className={styles.projectDetail}>
                   <h1>{selectedProject.title}</h1>
@@ -66,14 +76,23 @@ const Project = ({ projects }: { projects: Project[] }) => {
                     </div>
                     <div>
                       <FaRegCalendarAlt size={13} />
-                      <p>2023/04/29 - 2023/11/20</p>
+                      <p>{selectedProject.period}</p>
                     </div>
+                  </div>
+                  <div className={styles.tagContainer}>
+                    {selectedProject.stack.map((item, i) =>
+                      <p key={i} className={styles.tag}>{item}</p>
+                    )}
                   </div>
                 </div>
               </div>
-              <div className={styles.projectDetail}>
+              <div className={styles.projectDesc}>
+                <h3>설명</h3>
                 {selectedProject.desc}
-                Lorem ipsum, dolor sit amet consectetur adipisicing elit. Harum cupiditate repellat ab. At, ipsum mollitia perspiciatis tempore fuga fugit minus libero, doloremque exercitationem est asperiores esse accusantium, quod deserunt et!
+                <h3>역할</h3>
+                {selectedProject.role.map((item, i) =>
+                  <li key={i}>{item}</li>
+                )}
               </div>
             </div>
           )}
