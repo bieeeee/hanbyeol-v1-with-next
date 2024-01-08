@@ -5,7 +5,8 @@ export const basicFetch = async <returnType>(endpoint: string, customHeaders?: R
   if (endpoint === undefined) throw new Error("Endpoint error")
 
   const response = await fetch(endpoint, {
-    headers: headers
+    headers: headers,
+    cache: 'no-store'
   });
 
   if (!response.ok) throw new Error('Error occured');
