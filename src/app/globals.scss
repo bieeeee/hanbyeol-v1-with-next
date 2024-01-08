@@ -57,7 +57,7 @@ body {
   overflow-x: hidden;
   margin: 0;
   background-image: linear-gradient(-225deg, #5D9FFF 0%, #B8DCFF 48%, #6BBBFF 100%);
-  font-size: var(--fz-md);
+  font-size: var(--fz-sm);
 
   @media (max-width: 480px) {
     font-size: var(--fz-sm);
@@ -72,6 +72,10 @@ a {
 ul,
 li {
   list-style: none;
+}
+
+li::marker {
+  content: "➤  ";
 }
 
 .border {
@@ -181,10 +185,12 @@ li {
   align-items: center;
   justify-content: center;
   white-space: nowrap;
-  gap: 6px;
+  gap: 4px;
+  height: fit-content;
 
   p {
     margin: 0;
+    font-weight: 500;
   }
 }
 
