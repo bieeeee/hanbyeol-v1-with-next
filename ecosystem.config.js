@@ -1,6 +1,8 @@
 module.exports = {
   apps: [{
     script: 'npm start',
+    watch: true,
+    node_args: "",
     env_production: {
       NODE_ENV: "production"
     }
