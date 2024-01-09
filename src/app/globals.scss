@@ -96,7 +96,7 @@ li::marker {
 
 .folderContainer {
   @extend .border;
-  max-width: 70vw;
+  max-width: 80vw;
   width: 100%;
   height: 80vh;
   margin: 0 auto;
@@ -118,10 +118,6 @@ li::marker {
 
   @media (max-width: $med) {
     grid-template-columns: repeat(2, 1fr);
-  }
-
-  @media (max-width: $sm) {
-    grid-template-columns: repeat(1, 1fr);
   }
 }
 
