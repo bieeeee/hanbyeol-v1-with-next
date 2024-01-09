@@ -5,6 +5,7 @@ import { useState } from "react";
 import { close, folder, openFolder } from "@images";
 import { BsFillPeopleFill } from "@react-icons/all-files/bs/BsFillPeopleFill";
 import { FaRegCalendarAlt } from "@react-icons/all-files/fa/FaRegCalendarAlt";
+import { FaGithub } from "@react-icons/all-files/fa/FaGithub";
 import { useRouter } from 'next/navigation';
 
 
@@ -63,36 +64,42 @@ const Project = ({ projects }: { projects: Project[] }) => {
             </div>
           ) : (
             <div className={styles.projectContent}>
-              <div className={styles.projectInfo}>
-                <div className={styles.projectImg}>
-                  <Image src={image} fill alt={selectedProject.title} />
-                </div>
-                <div className={styles.projectDetail}>
-                  <h1>{selectedProject.title}</h1>
+              <div className={styles.projectImg}>
+                <Image src={image} fill alt={selectedProject.title} />
+              </div>
+              <div className={styles.projectDetail}>
+                <h1>{selectedProject.title}</h1>
+                <div>
                   <div>
-                    <div>
-                      <BsFillPeopleFill size={13} />
-                      <p>1</p>
-                    </div>
-                    <div>
-                      <FaRegCalendarAlt size={13} />
-                      <p>{selectedProject.period}</p>
-                    </div>
+                    <BsFillPeopleFill size={13} />
+                    <p>{selectedProject.team}</p>
                   </div>
-                  <div className={styles.tagContainer}>
-                    {selectedProject.stack.map((item, i) =>
-                      <p key={i} className={styles.tag}>{item}</p>
-                    )}
+                  <div>
+                    <FaRegCalendarAlt size={13} />
+                    <p>{selectedProject.period}</p>
                   </div>
+                  <div>
+                    <FaGithub size={13} />
+                    <a href={selectedProject.repo} target='_blank'>Code</a>
+                    </div>
+                </div>
+                <div className={styles.tagContainer}>
+                  {selectedProject.stack.map((item, i) =>
+                    <p key={i} className={styles.tag}>{item}</p>
+                  )}
                 </div>
               </div>
               <div className={styles.projectDesc}>
-                <h3>설명</h3>
-                {selectedProject.desc}
-                <h3>역할</h3>
-                {selectedProject.role.map((item, i) =>
-                  <li key={i}>{item}</li>
-                )}
+                <div>
+                  <h4>설명</h4>
+                  {selectedProject.desc.replace('.', '.\n')}
+                </div>
+                <div>
+                  <h4>역할</h4>
+                  {selectedProject.role.map((item, i) =>
+                    <li key={i}>{item}</li>
+                  )}
+                </div>
               </div>
             </div>
           )}
