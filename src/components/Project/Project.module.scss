@@ -9,82 +9,93 @@
 .projectContent {
   display: flex;
   flex-direction: column;
+  align-items: center;
   width: 100%;
   height: 100%;
   padding: 15px;
   gap: 10px;
   overflow: auto !important;
 
-  .projectInfo {
-    flex: 1;
-    display: flex;
+  .projectImg {
     width: 100%;
-    height: 100%;
-    justify-content: center;
-    gap: 20px;
+    max-width: 650px;
+    margin: 0 auto;
 
-    @media (max-width: 800px) {
-      flex-direction: column;
+    >div {
+      position: unset;
     }
 
-    .projectImg {
+    >img {
+      position: relative !important;
+      object-fit: contain;
+      z-index: 10;
+      top: 0;
+      left: 0;
       width: 100%;
+      height: unset !important;
+    }
+  }
 
-      > div {
-        position: unset;
-      }
+  .projectDetail {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 5px;
 
-      > img {
-        position: relative !important;
-        object-fit: contain;
-        z-index: 10;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: unset !important;
-      }
+    h1 {
+      margin: 5px 0px;
     }
 
-    .projectDetail {
-      width: 100%;
-      text-align: left;
+    div {
       display: flex;
-      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      gap: 3px;
+      flex-wrap: wrap;
 
-      &:first-child, * {
+      p {
         margin: 0;
-        display: flex;
-        justify-content: left;
-        align-items: center;
-        gap: 3px;
-
-        * {
-          display: flex;
-        }
+        margin-right: 10px;
       }
 
-      .tagContainer {
-        display: flex;
-        flex-wrap: wrap;
-        width: 100%;
-        align-items: flex-start;
-        margin-top: 4px;
+      a:hover {
+        color: blue;
+      }
+    }
 
-        .tag {
-          background-color: rgba(74, 255, 98, 0.587);
-          color: rgb(3, 50, 3);
-          border-radius: 4px;
-          width: fit-content;
-          padding: 0px 2px;
-          white-space: nowrap;
-          margin-right: 4px;
-          margin-top: 3px;
-        }
+
+
+    .tagContainer {
+      display: flex;
+      flex-wrap: wrap;
+      width: 100%;
+      align-items: flex-start;
+      margin-top: 4px;
+
+      .tag {
+        background-color: rgba(74, 255, 98, 0.587);
+        color: rgb(3, 50, 3);
+        border-radius: 4px;
+        width: fit-content;
+        padding: 0px 2px;
+        white-space: nowrap;
+        margin-right: 4px;
+        margin-top: 3px;
       }
     }
   }
 
   .projectDesc {
     flex: 0.6;
+    white-space: pre-wrap;
+    text-align: center;
+
+    >div:first-child {
+      margin: 20px 0px;
+    }
+
+    h4 {
+      margin: 4px 0px;
+    }
   }
 }
