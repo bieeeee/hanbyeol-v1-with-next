@@ -12,7 +12,7 @@ function Terminal() {
       {openT == false ?
         <div className='folder' onClick={() => setOpenT(true)}>
           <Image src={prompt} alt='prompt' width={48} height={48} />
-          About Me
+          <p>About Me</p>
         </div>
         :
         <div className={styles.terminal} id='about'>
