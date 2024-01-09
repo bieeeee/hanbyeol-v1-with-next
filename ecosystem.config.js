@@ -7,7 +7,7 @@ module.exports = {
   }],
   deploy: {
     production: {
-      key: 'devops-1.pem',
+      key: '~/.ssh/devops-1.pem',
       user: 'ubuntu',
       host: '3.35.9.182',
       ref: 'origin/master',
