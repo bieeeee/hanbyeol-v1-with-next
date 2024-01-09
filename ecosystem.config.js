@@ -1,6 +1,5 @@
 module.exports = {
   apps: [{
-    name: 'v1next',
     script: 'npm start',
     env_production: {
       NODE_ENV: "production"
