@@ -1,11 +1,7 @@
 module.exports = {
   apps: [{
     name: 'v1next',
-    script: 'node_modules/next/dist/bin/next',
-    args: "start",
-    watch: true,
-    exec_mode : "cluster",
-    node_args: "",
+    script: 'npm start',
     env_production: {
       NODE_ENV: "production"
     }
