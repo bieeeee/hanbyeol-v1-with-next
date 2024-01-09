@@ -1,7 +1,10 @@
 module.exports = {
   apps: [{
-    script: 'npm start',
+    name: 'v1next',
+    script: 'npm',
+    args: 'start',
     watch: true,
+    interpreter: "bash",
     node_args: "",
     env_production: {
       NODE_ENV: "production"
