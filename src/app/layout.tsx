@@ -1,9 +1,9 @@
 import type { Metadata } from 'next'
-import { Noto_Sans_KR } from 'next/font/google'
+import { Gothic_A1 } from 'next/font/google'
 import './globals.scss'
 import Navbar from '@/components/Navbar/Navbar'
 
-const ibm = Noto_Sans_KR({ subsets: ['latin'] })
+const ibm = Gothic_A1({ subsets: ['latin'], weight: ['100', '200', '300', '400', '500'] })
 
 export const metadata: Metadata = {
   title: 'Create Next App',
