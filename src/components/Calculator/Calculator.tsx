@@ -5,66 +5,75 @@ import { useRouter } from 'next/navigation';
 import { close, calculator } from '@images';
 import { useRef, useState } from 'react';
 
+interface Debts {
+  [key: string]: {
+    [key: string]: number;
+  }
+}
+
 const Calculator = () => {
   const router = useRouter();
   const nRef = useRef<HTMLInputElement>(null);
   const [names, setNames] = useState<Array<string>>([]);
   const [money, setMoney] = useState<{ [key: string]: number }>({});
+  const [debts, setDebts] = useState<Debts>({});
+  const [showResult, setShowResult] = useState(false);
 
   const handleSubmit = () => {
     let input = nRef.current?.value.replace(/\s+/g, '');
     if (input === undefined || !input.includes(',')) {
       alert('We need more than one name. Use comma to separate.')
     } else {
-      const names = input?.split(',')
-      setNames(names)
+      const names = input?.split(',');
+      const uniqueNames = [...new Set(names)]
+      if (names.length !== uniqueNames.length) {
+        alert('Each name needs to be unique.')
+      } else {
+        setNames(names)
+      }
     }
   }
 
-  const handleMoney = (e:any, name:string) => {
+  const handleMoney = (e: any, name: string) => {
     const m = e.target.valueAsNumber;
     setMoney(prevMoney => ({
       ...prevMoney,
       [name]: m
     }));
-
   }
-
-  const debts: { [key: string]: { [key: string]: number | undefined } } = {};
+  const totalSpent = Object.values(money).reduce((a, b) => a + b, 0);
+  const perPerson = parseInt((totalSpent / names.length).toFixed(2));
 
   const handleCalculate = () => {
+    if (Object.values(money).some(e => e === undefined)) {
+      alert('Please enter number')
+    } else {
+      let updatedDebts: Debts = {};
+      names.forEach((name1, i) => {
+        updatedDebts[name1] = updatedDebts[name1] || {};
 
-    names.forEach((name1) => {
-      debts[name1] = {};
+        names.forEach((name2, j) => {
+          if (i !== j) {
+            const amountOwed = (money[name1] || 0) / names.length - (money[name2] || 0) / names.length;
 
-      names.forEach((name2) => {
-        if (name1 !== name2) {
-          const amountOwed = (money[name1] || 0) / names.length - (money[name2] || 0) / names.length;
-
-          if (amountOwed !== 0) {
-            debts[name1][name2] = parseInt(amountOwed.toFixed(2));
+            if (amountOwed !== 0) {
+              updatedDebts[name1][name2] = parseInt(amountOwed.toFixed(2));
+            }
           }
+        });
+
+        const totalOwedByThisPerson = Object.values(updatedDebts[name1]).reduce((acc: number, val) => {
+          return acc + (typeof val === 'number' ? val : 0);
+        }, 0);
+        if (totalOwedByThisPerson !== undefined) {
+          updatedDebts[name1]['total'] = parseInt(totalOwedByThisPerson.toFixed(2));
         }
       });
-
-      const totalOwedByThisPerson = Object.values(debts[name1]).reduce((acc, val) => {
-        if (typeof val === 'number') {
-          return acc !== undefined ? acc + val : val;
-        } else if (typeof val === 'string') {
-          const parsedVal = parseFloat(val);
-          if (!isNaN(parsedVal)) {
-            return acc !== undefined ? acc + parsedVal : parsedVal;
-          }
-        }
-        return acc;
-      }, 0);
-
-      if (totalOwedByThisPerson !== undefined) {
-        debts[name1]['total'] = parseInt(totalOwedByThisPerson.toFixed(2));
-      }
-    });
+      setDebts(updatedDebts);
+      setShowResult(true);
+    }
   }
-
+  console.log(money)
 
   return (
     <div className={`${styles.calculatorContainer} folderContainer`}>
@@ -75,7 +84,7 @@ const Calculator = () => {
         </div>
         <button
           className="close-modal"
-          onClick={() => router.back()}
+          onClick={() => router.push('/')}
         >
           <Image src={close} width={12} height={12} alt="close-button" />
         </button>
@@ -94,26 +103,47 @@ const Calculator = () => {
             <button onClick={handleSubmit} className='close-modal'>Submit</button>
           </div>
         }
-        {names.length !== 0 &&
+        {names.length !== 0 && !showResult &&
           <div className={styles.moneyInput}>
             <p>개별이 사용한 금액을 입력해주세요.</p>
             {names.map((name, i) =>
               <div key={i}>
                 <p>{name + ' : '}</p>
                 <input
-                  type='number'
+                  type="number"
+                  min="1"
                   required
-                  onChange={(e)=> {
+                  onChange={(e) => {
                     handleMoney(e, name)
                   }}
                   className='clickedBorder'
-                  defaultValue={0}
                 />
                 <p>원</p>
               </div>
             )}
             <button onClick={handleCalculate} className='close-modal'>Submit</button>
-            <button onClick={() => {setNames([]); setMoney({});}} className='close-modal'>Cancel</button>
+            <button onClick={() => { setNames([]); setMoney({}); }} className='close-modal'>Cancel</button>
+          </div>
+        }
+        {names.length !== 0 && showResult &&
+          <div>
+            <p>총 사용 금액: {totalSpent}원</p>
+            <p>N빵: {perPerson}원</p>
+            {names.map((name, i) =>
+              <div key={i}>
+                <p>{`${name}: ${money[name]}원 지출`}</p>
+                {Object.entries(debts[name]).map(([key, value], j) => (
+                  <li key={j}>
+                    {key == 'total' ?
+                      `Total(${perPerson} - ${money[name]}): ${-value}원`
+                      :
+                      `${key}에게 ${Math.abs(value)}원 ${value < 0 ? '주세요' : '받으세요'}`
+                    }
+                  </li>
+                ))}
+              </div>
+            )}
+            <button onClick={() => { setNames([]); setMoney({}); setShowResult(false); }} className='close-modal'>Reset</button>
           </div>
         }
       </div>
