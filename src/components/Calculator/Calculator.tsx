@@ -1,5 +1,6 @@
 'use client'
 import Image from 'next/image';
+import styles from './calculator.module.scss';
 import { useRouter } from 'next/navigation';
 import { close, calculator } from '@images';
 import { useRef, useState } from 'react';
@@ -11,7 +12,7 @@ const Calculator = () => {
   const [money, setMoney] = useState<{ [key: string]: number }>({});
 
   const handleSubmit = () => {
-    let input = nRef.current?.value.replace(' ', '');
+    let input = nRef.current?.value.replace(/\s+/g, '');
     if (input === undefined || !input.includes(',')) {
       alert('We need more than one name. Use comma to separate.')
     } else {
@@ -32,6 +33,7 @@ const Calculator = () => {
   const debts: { [key: string]: { [key: string]: number | undefined } } = {};
 
   const handleCalculate = () => {
+
     names.forEach((name1) => {
       debts[name1] = {};
 
@@ -65,7 +67,7 @@ const Calculator = () => {
 
 
   return (
-    <div className="folderContainer">
+    <div className={`${styles.calculatorContainer} folderContainer`}>
       <div className="modalBar">
         <div className="modalBarLeft">
           <Image src={calculator} width={12} height={12} alt="calculator-icon" />
@@ -78,24 +80,40 @@ const Calculator = () => {
           <Image src={close} width={12} height={12} alt="close-button" />
         </button>
       </div>
-      <div className="modal-content">
+      <div className={`${styles.calculatorContent} modal-content`}>
         {names.length === 0 &&
-          <div>
-            Enter Names with Commas:
-            <input ref={nRef} type='text'></input>
-            <button onClick={handleSubmit}>Submit</button>
+          <div className={styles.nameInput}>
+            <p>콤마를 이용하여 1개 이상의 이름을 입력해주세요.</p>
+            <input
+              ref={nRef}
+              type='text'
+              required
+              placeholder='마요, 케첩, 설탕'
+              className='clickedBorder'
+            />
+            <button onClick={handleSubmit} className='close-modal'>Submit</button>
           </div>
         }
         {names.length !== 0 &&
-          <div>
+          <div className={styles.moneyInput}>
+            <p>개별이 사용한 금액을 입력해주세요.</p>
             {names.map((name, i) =>
               <div key={i}>
-                {name + ' : ₩'}
-                <input type='number' onChange={(e)=>handleMoney(e, name)}></input>
+                <p>{name + ' : '}</p>
+                <input
+                  type='number'
+                  required
+                  onChange={(e)=> {
+                    handleMoney(e, name)
+                  }}
+                  className='clickedBorder'
+                  defaultValue={0}
+                />
+                <p>원</p>
               </div>
             )}
-            <button onClick={handleCalculate}>Submit</button>
-            <button onClick={() => {setNames([]); setMoney({});}}>Cancel</button>
+            <button onClick={handleCalculate} className='close-modal'>Submit</button>
+            <button onClick={() => {setNames([]); setMoney({});}} className='close-modal'>Cancel</button>
           </div>
         }
       </div>
