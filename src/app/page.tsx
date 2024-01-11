@@ -15,7 +15,7 @@ export default function Home() {
         <p>Projects</p>
       </Link>
       <Link href="/calculator" className='folder'>
-        <Image src={calculator} width={50} height={40} alt='calculator' />
+        <Image src={calculator} width={53} height={44} alt='calculator' />
         <p>N빵 계산기</p>
       </Link>
       <a href="https://www.linkedin.com/in/hanbyeol-kwon/" target='_blank' rel="noreferrer noopener" className='folder' style={{ textDecoration: 'none', color: 'black' }}>
