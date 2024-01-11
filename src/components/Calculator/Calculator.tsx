@@ -47,10 +47,10 @@ const Calculator = () => {
     }));
   }
   const totalSpent = Object.values(money).reduce((a, b) => a + b, 0);
-  const perPerson = parseInt((totalSpent / names.length).toFixed(2));
+  const perPerson = Number((totalSpent / names.length).toFixed(2));
 
   const handleCalculate = () => {
-    if (Object.values(money).length !== names.length) {
+    if (Object.values(money).length !== names.length || Object.values(money).some(e=> isNaN(e))){
       alert('Please enter value.')
     } else {
       let updatedDebts: Debts = {};
@@ -62,7 +62,7 @@ const Calculator = () => {
             const amountOwed = (money[name1] || 0) / names.length - (money[name2] || 0) / names.length;
 
             if (amountOwed !== 0) {
-              updatedDebts[name1][name2] = parseInt(amountOwed.toFixed(2));
+              updatedDebts[name1][name2] = Number(amountOwed.toFixed(2));
             }
           }
         });
@@ -71,7 +71,7 @@ const Calculator = () => {
           return acc + (typeof val === 'number' ? val : 0);
         }, 0);
         if (totalOwedByThisPerson !== undefined) {
-          updatedDebts[name1]['total'] = parseInt(totalOwedByThisPerson.toFixed(2));
+          updatedDebts[name1]['total'] = Number(totalOwedByThisPerson.toFixed(2));
         }
       });
       setDebts(updatedDebts);
