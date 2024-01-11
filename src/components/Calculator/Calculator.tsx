@@ -18,18 +18,23 @@ const Calculator = () => {
   const [money, setMoney] = useState<{ [key: string]: number }>({});
   const [debts, setDebts] = useState<Debts>({});
   const [showResult, setShowResult] = useState(false);
+  const regExp = /[\{\}\[\]\/?.;:|\)*~`!^\-_+<>@\#$%&\\\=\(\'\"]/g;
 
   const handleSubmit = () => {
     let input = nRef.current?.value.replace(/\s+/g, '');
-    if (input === undefined || !input.includes(',')) {
-      alert('We need more than one name. Use comma to separate.')
+    if (input === undefined || !input.includes(',') || input.match(regExp)) {
+      alert('We need more than one name. Use only comma to separate names.')
     } else {
       const names = input?.split(',');
-      const uniqueNames = [...new Set(names)]
-      if (names.length !== uniqueNames.length) {
-        alert('Each name needs to be unique.')
+      if (names.includes('')) {
+        alert('Empty value is not accepted.')
       } else {
-        setNames(names)
+        const uniqueNames = [...new Set(names)]
+        if (names.length !== uniqueNames.length) {
+          alert('Each name needs to be unique.')
+        } else {
+          setNames(names)
+        }
       }
     }
   }
@@ -45,8 +50,8 @@ const Calculator = () => {
   const perPerson = parseInt((totalSpent / names.length).toFixed(2));
 
   const handleCalculate = () => {
-    if (Object.values(money).some(e => e === undefined)) {
-      alert('Please enter number')
+    if (Object.values(money).length !== names.length) {
+      alert('Please enter value.')
     } else {
       let updatedDebts: Debts = {};
       names.forEach((name1, i) => {
