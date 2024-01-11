@@ -1,0 +1,43 @@
+.calculatorContainer {
+  .calculatorContent {
+    background-color: var(--light-slate);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+
+    .nameInput, .moneyInput {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+
+      input {
+        border-radius: 0;
+        background-color: white;
+      }
+
+      input:focus {
+        outline: none;
+      }
+    }
+
+    .moneyInput {
+
+      >div {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        p {
+          margin: 0;
+          width: fit-content;
+          white-space: pre;
+        }
+
+        input {
+          text-align: right;
+        }
+      }
+    }
+  }
+}
