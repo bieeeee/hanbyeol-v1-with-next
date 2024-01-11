@@ -146,25 +146,24 @@ li::marker {
       margin-right: 3px;
     }
   }
-
-  .close-modal {
-    @extend .border;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-right: 3px;
-    padding: 2.5px;
-  }
-
-  .close-modal:active:enabled {
-    @extend .clickedBorder;
-  }
-
-  .close-modal:disabled {
-    cursor: not-allowed;
-  }
 }
 
+.close-modal {
+  @extend .border;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-right: 3px;
+  padding: 2.5px;
+}
+
+.close-modal:active:enabled {
+  @extend .clickedBorder;
+}
+
+.close-modal:disabled {
+  cursor: not-allowed;
+}
 
 .modal-content {
   @extend .clickedBorder;
