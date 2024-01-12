@@ -11,32 +11,44 @@ interface Debts {
   }
 }
 
+interface Money {
+  [key: string]: number;
+}
+
 const Calculator = () => {
   const router = useRouter();
   const nRef = useRef<HTMLInputElement>(null);
   const [names, setNames] = useState<Array<string>>([]);
-  const [money, setMoney] = useState<{ [key: string]: number }>({});
+  const [money, setMoney] = useState<Money>({});
   const [debts, setDebts] = useState<Debts>({});
   const [showResult, setShowResult] = useState(false);
-  const regExp = /[\{\}\[\]\/?.;:|\)*~`!^\-_+<>@\#$%&\\\=\(\'\"]/g;
+  const specialReg = /[^a-zA-Zㄱ-ㅎ가-힣,]/;
 
   const handleSubmit = () => {
-    let input = nRef.current?.value.replace(/\s+/g, '');
-    if (input === undefined || !input.includes(',') || input.match(regExp)) {
-      alert('We need more than one name. Use only comma to separate names.')
-    } else {
-      const names = input?.split(',');
-      if (names.includes('')) {
-        alert('Empty value is not accepted.')
-      } else {
-        const uniqueNames = [...new Set(names)]
-        if (names.length !== uniqueNames.length) {
-          alert('Each name needs to be unique.')
-        } else {
-          setNames(names)
-        }
-      }
+    const input = nRef.current?.value.replace(/\s+/g, '');
+    if (!input || !input.includes(',')) {
+      alert('Please enter at least one name separated by commas.');
+      return;
     }
+
+    if (input.match(specialReg)) {
+      alert('Please use only letters and commas.');
+      return;
+    }
+
+    const names = input?.split(',');
+    if (names.some(name => !name)) {
+      alert('Empty values are not accepted.');
+      return;
+    }
+
+    const uniqueNames = [...new Set(names)];
+    if (names.length !== uniqueNames.length) {
+      alert('Each name needs to be unique.');
+      return;
+    }
+
+    setNames(names);
   }
 
   const handleMoney = (e: any, name: string) => {
@@ -50,7 +62,7 @@ const Calculator = () => {
   const perPerson = Number((totalSpent / names.length).toFixed(2));
 
   const handleCalculate = () => {
-    if (Object.values(money).length !== names.length || Object.values(money).some(e=> isNaN(e))){
+    if (Object.values(money).length !== names.length || Object.values(money).some(e => isNaN(e))) {
       alert('Please enter value.')
     } else {
       let updatedDebts: Debts = {};
