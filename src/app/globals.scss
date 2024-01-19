@@ -57,7 +57,7 @@ body {
   overflow-x: hidden;
   margin: 0;
   background-image: linear-gradient(-225deg, #5D9FFF 0%, #B8DCFF 48%, #6BBBFF 100%);
-  font-size: var(--fz-sm);
+  font-size: var(--fz-md);
 
   @media (max-width: 480px) {
     font-size: var(--fz-sm);
@@ -76,6 +76,14 @@ li {
 
 li::marker {
   content: "➤  ";
+}
+
+button, input {
+  font-family: inherit;
+}
+
+input {
+  padding: 5px;
 }
 
 .border {
