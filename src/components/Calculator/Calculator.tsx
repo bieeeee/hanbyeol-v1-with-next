@@ -97,7 +97,7 @@ const Calculator = () => {
       <div className="modalBar">
         <div className="modalBarLeft">
           <Image src={calculator} width={12} height={12} alt="calculator-icon" />
-          <p>얼마줘야돼?</p>
+          <p>N빵 계산기</p>
         </div>
         <button
           className="close-modal"
@@ -117,11 +117,15 @@ const Calculator = () => {
               placeholder='마요, 케첩, 설탕'
               className='clickedBorder'
             />
-            <button onClick={handleSubmit} className='close-modal'>Submit</button>
+            <button type='submit' onClick={handleSubmit} className='close-modal'>
+              Submit
+            </button>
           </div>
         }
-        {names.length !== 0 && !showResult &&
           <div className={styles.moneyInput}>
+        {names.length ?
+          !showResult ?
+          <>
             <p>개별이 사용한 금액을 입력해주세요.</p>
             {names.map((name, i) =>
               <div key={i}>
@@ -140,29 +144,31 @@ const Calculator = () => {
             )}
             <button onClick={handleCalculate} className='close-modal'>Submit</button>
             <button onClick={() => { setNames([]); setMoney({}); }} className='close-modal'>Cancel</button>
-          </div>
-        }
-        {names.length !== 0 && showResult &&
-          <div>
+          </>
+            :
+            <div className={styles.result}>
             <p>총 사용 금액: {totalSpent}원</p>
             <p>N빵: {perPerson}원</p>
             {names.map((name, i) =>
               <div key={i}>
                 <p>{`${name}: ${money[name]}원 지출`}</p>
                 {Object.entries(debts[name]).map(([key, value], j) => (
-                  <li key={j}>
+                  <p key={j}>
                     {key == 'total' ?
                       `Total(${perPerson} - ${money[name]}): ${-value}원`
                       :
                       `${key}에게 ${Math.abs(value)}원 ${value < 0 ? '주세요' : '받으세요'}`
                     }
-                  </li>
+                  </p>
                 ))}
               </div>
             )}
             <button onClick={() => { setNames([]); setMoney({}); setShowResult(false); }} className='close-modal'>Reset</button>
           </div>
+          :
+          null
         }
+        </div>
       </div>
     </div>
   )

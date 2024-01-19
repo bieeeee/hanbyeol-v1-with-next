@@ -38,6 +38,11 @@
           text-align: right;
         }
       }
+
+      .result {
+        display: flex;
+        flex-direction: column;
+      }
     }
   }
 }
