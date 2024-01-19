@@ -6,5 +6,6 @@ import openFolder from './images/folder-open.png';
 import linkedin from './images/linkedin.png';
 import github from './images/github.png';
 import calculator from './images/calculator.png';
+import velog from './images/velog.png';
 
-export { logo, prompt, close, folder, openFolder, linkedin, github, calculator }
+export { logo, prompt, close, folder, openFolder, linkedin, github, calculator, velog }
