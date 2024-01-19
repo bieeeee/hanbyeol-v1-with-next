@@ -1,9 +1,12 @@
 import type { Metadata } from 'next'
-import { Gothic_A1 } from 'next/font/google'
 import './globals.scss'
 import Navbar from '@/components/Navbar/Navbar'
+import localFont from 'next/font/local'
 
-const ibm = Gothic_A1({ subsets: ['latin'], weight: ['100', '200', '300', '400', '500'] })
+const neo = localFont({
+  src: "./fonts/neodgm_code.woff2",
+  display: "swap"
+})
 
 export const metadata: Metadata = {
   title: 'Hanbyeol Kwon | Fullstack Developer',
@@ -17,7 +20,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={ibm.className}>
+      <body className={neo.className}>
         <Navbar />
         {children}
       </body>
