@@ -11,15 +11,15 @@ export default function Home() {
       <Terminal />
       <SkillItems />
       <Link href="/projects" className='folder'>
-        <Image src={folder} width={48} height={48} alt='projects-folder' />
+        <Image src={folder} width={48} height={48} alt='projects-folder' priority />
         <p>Projects</p>
       </Link>
       <Link href="/calculator" className='folder'>
-        <Image src={calculator} width={53} height={48} alt='calculator' />
+        <Image src={calculator} width={53} height={48} alt='calculator' priority />
         <p>N빵 계산기</p>
       </Link>
       <a href="https://velog.io/@bieeeee" target='_blank' rel="noreferrer noopener" className='folder' style={{ textDecoration: 'none', color: 'black' }}>
-        <Image src={velog} height={46} width={46} alt='linkedin' priority />
+        <Image src={velog} height={46} width={46} alt='velog' priority />
         <p>Velog</p>
       </a>
       <a href="https://www.linkedin.com/in/hanbyeol-kwon/" target='_blank' rel="noreferrer noopener" className='folder' style={{ textDecoration: 'none', color: 'black' }}>
