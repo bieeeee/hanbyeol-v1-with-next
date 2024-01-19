@@ -3,7 +3,7 @@ import Terminal from '@/components/Terminal/Terminal';
 import SkillItems from '@/components/Skill/SkillItems';
 import Link from 'next/link';
 import Image from 'next/image';
-import { folder, linkedin, github, calculator } from '@images';
+import { folder, linkedin, github, calculator, velog } from '@images';
 
 export default function Home() {
   return (
@@ -15,9 +15,13 @@ export default function Home() {
         <p>Projects</p>
       </Link>
       <Link href="/calculator" className='folder'>
-        <Image src={calculator} width={53} height={44} alt='calculator' />
+        <Image src={calculator} width={53} height={48} alt='calculator' />
         <p>N빵 계산기</p>
       </Link>
+      <a href="https://velog.io/@bieeeee" target='_blank' rel="noreferrer noopener" className='folder' style={{ textDecoration: 'none', color: 'black' }}>
+        <Image src={velog} height={46} width={46} alt='linkedin' priority />
+        <p>Velog</p>
+      </a>
       <a href="https://www.linkedin.com/in/hanbyeol-kwon/" target='_blank' rel="noreferrer noopener" className='folder' style={{ textDecoration: 'none', color: 'black' }}>
         <Image src={linkedin} height={46} width={46} alt='linkedin' priority />
         <p>LinkedIn</p>
