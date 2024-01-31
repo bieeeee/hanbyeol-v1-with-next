@@ -21,6 +21,11 @@
       border-right: var(--border-highlight);
       border-bottom: var(--border-highlight);
       border-left: var(--border);
+      overflow-y: scroll;
+
+      &::-webkit-scrollbar {
+        display:none;
+      }
 
       @media (max-width: 650px) {
         height: 350px;
