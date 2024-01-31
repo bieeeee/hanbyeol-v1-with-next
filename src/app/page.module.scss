@@ -3,13 +3,16 @@
   height: calc(100vh - 41px);
   overflow-x: hidden;
   width: 100%;
-  max-width: 1228px;
   display: flex;
   justify-content: space-evenly;
   gap: 50px;
   margin: 0 auto;
   flex-wrap: wrap;
   align-items: center;
+
+  &::-webkit-scrollbar {
+    display:none;
+  }
 }
 
 .projectMain {
