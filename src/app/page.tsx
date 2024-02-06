@@ -15,7 +15,7 @@ export default function Home() {
         <p>Projects</p>
       </Link>
       <Link href="/calculator" className='folder'>
-        <Image src={calculator} width={53} height={48} alt='calculator' priority />
+        <Image src={calculator} width={53} height={46} alt='calculator' priority />
         <p>N빵 계산기</p>
       </Link>
       <a href="https://velog.io/@bieeeee" target='_blank' rel="noreferrer noopener" className='folder' style={{ textDecoration: 'none', color: 'black' }}>
