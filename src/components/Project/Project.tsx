@@ -12,13 +12,13 @@ import { useRouter } from 'next/navigation';
 const Project = ({ projects }: { projects: Project[] }) => {
   const router = useRouter();
   const [selectedId, setSelectedId] = useState<number>(-1);
-  const [isSelected, setIsSelcted] = useState<boolean>(false);
+  const [isSelected, setIsSelected] = useState<boolean>(false);
   const selectedProject = projects[selectedId];
   const image = selectedProject?.image;
 
   const toggleProjectItem = (id: number) => {
     setSelectedId(id - 1);
-    setIsSelcted(!isSelected);
+    setIsSelected(!isSelected);
   };
 
   return (
