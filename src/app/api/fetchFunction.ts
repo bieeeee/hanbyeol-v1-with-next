@@ -9,7 +9,7 @@ export const basicFetch = async <returnType>(endpoint: string, customHeaders?: R
     cache: 'no-store'
   });
 
-  if (!response.ok) throw new Error('Error occured');
+  if (!response.ok) throw new Error();
 
   const data = await response.json();
 
