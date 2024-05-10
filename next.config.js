@@ -12,12 +12,13 @@ const nextConfig = {
       },
       {
         protocol: 'https',
-        hostname: '**.cloudinary.com',
+        hostname: '*cloudinary.com',
         port: '',
         pathname: `/${process.env.NEXT_PUBLIC_CLOUD_NAME}/image/upload/**`,
       },
     ],
   },
+  output: "standalone"
 }
 
 module.exports = nextConfig
