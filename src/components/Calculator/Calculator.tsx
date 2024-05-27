@@ -2,7 +2,7 @@
 import Image from 'next/image';
 import styles from './calculator.module.scss';
 import { useRouter } from 'next/navigation';
-import { close, calculator } from '@images';
+import { close, calculator } from '@assets/images/index';
 import { useRef, useState } from 'react';
 
 interface Debts {

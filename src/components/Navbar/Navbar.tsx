@@ -1,10 +1,9 @@
 'use client'
-
 import styles from './navbar.module.scss';
-import { useState } from 'react';
 import Image from 'next/image';
+import { useState } from 'react';
 import Dropdown from '@/components/Dropdown/Dropdown';
-import { logo } from '@images';
+import { logo } from '@assets/images/index'
 
 const Navbar = () => {
   const [dropdown, setDropdown] = useState(false);
