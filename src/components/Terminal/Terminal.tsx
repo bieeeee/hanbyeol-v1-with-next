@@ -1,19 +1,23 @@
 'use client'
 import styles from './Terminal.module.scss';
 import Image from 'next/image';
-import { close, prompt } from '@images';
+import { close, prompt } from '@assets/images/index';
 import { TypeAnimation } from 'react-type-animation';
 import { useState } from 'react';
+import { Icon } from '../ui/icon';
 
 function Terminal() {
-  const [openT, setOpenT] = useState(true);
+  const [openT, setOpenT] = useState(false);
   return (
     <>
       {openT == false ?
-        <div className='folder' onClick={() => setOpenT(true)}>
-          <Image src={prompt} alt='prompt' width={48} height={48} />
-          <p>About Me</p>
-        </div>
+        <Icon
+          title='Prompt'
+          alt='prompt'
+          src={prompt}
+          href='/'
+          onClick={()=>setOpenT(true)}
+        />
         :
         <div className={styles.terminal} id='about'>
           <div className={`${styles.container} border`}>
