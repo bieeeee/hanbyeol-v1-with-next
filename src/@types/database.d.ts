@@ -8,7 +8,7 @@ interface Project {
   stack: Array<string>;
   image: string;
   repo: string;
-}
+}[]
 
 interface Skills {
   [key: string]: number;
