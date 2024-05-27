@@ -1,12 +1,10 @@
-'use client'
 import styles from './Skill.module.scss';
-import Image from 'next/image';
-import { folder, openFolder } from '@images';
+import { openFolder } from '@assets/images/index';
 import { Chart as ChartJS, ArcElement, Tooltip, Legend, Colors } from "chart.js";
 import { Doughnut } from "react-chartjs-2";
 import ChartDataLabels from 'chartjs-plugin-datalabels';
 import { Modal } from '../ui/modal';
-import { useModalStore } from '../hooks/useModalStore';
+import { getSkills } from '../../app/api/getSkills';
 
 ChartJS.register(ArcElement, ChartDataLabels, Tooltip, Legend, Colors);
 
@@ -38,29 +36,20 @@ const options: any = {
   }
 }
 
-const Skill = ({ data }: any) => {
-  const skillModal = useModalStore();
-
+const Skill = async () => {
+  const skillsData = await getSkills();
   return (
-    <>
-      <div onClick={skillModal.onOpen} className="folder">
-        <Image src={folder} width={48} height={48} alt='folder-icon' priority />
-        <p>Skills</p>
+    <Modal
+      title='Frequently Used Skills'
+      modalStyle={styles.modal}
+      containerStyle={`${styles.skillContainer} folderContainer`}
+      src={openFolder}
+      alt='open-folder'
+    >
+      <div className={styles.chart}>
+        <Doughnut data={skillsData} options={options} />
       </div>
-        <Modal
-          title='Frequently Used Skills'
-          modalStyle={styles.modal}
-          containerStyle={`${styles.skillContainer} folderContainer`}
-          src={openFolder}
-          alt='open-folder'
-          isOpen={skillModal.isOpen}
-          onClose={skillModal.onClose}
-        >
-          <div className={styles.chart}>
-            <Doughnut data={data} options={options} />
-          </div>
-        </Modal>
-    </>
+    </Modal>
   )
 }
 
