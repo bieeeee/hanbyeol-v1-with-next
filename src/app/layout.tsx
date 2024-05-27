@@ -1,12 +1,6 @@
 import type { Metadata } from 'next'
 import './globals.scss'
 import Navbar from '@/components/Navbar/Navbar'
-import localFont from 'next/font/local'
-
-const neo = localFont({
-  src: "./fonts/neodgm_code.woff2",
-  display: "swap"
-})
 
 export const metadata: Metadata = {
   title: 'Hanbyeol Kwon | Fullstack Developer',
@@ -20,7 +14,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={neo.className}>
+      <body className="font-PSN">
         <Navbar />
         {children}
       </body>
