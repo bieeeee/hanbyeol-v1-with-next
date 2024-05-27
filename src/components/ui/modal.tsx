@@ -1,5 +1,6 @@
 import Image, { StaticImageData } from "next/image";
-import { close } from '@images';
+import useModalStore from "../hooks/useModalStore";
+import { close } from '@assets/images/index';
 
 interface ModalProps {
     title: string;
@@ -8,8 +9,6 @@ interface ModalProps {
     src: StaticImageData;
     alt: string;
     children?: React.ReactNode;
-    isOpen: boolean;
-    onClose: () => void;
 }
 
 export const Modal: React.FC<ModalProps> = ({
@@ -18,22 +17,15 @@ export const Modal: React.FC<ModalProps> = ({
     containerStyle,
     src,
     alt,
-    isOpen,
-    onClose,
     children
 }) => {
-    const onChange = (open: boolean) => {
-        if (!open) {
-            onClose();
-        }
-    }
     return (
         <dialog
-            className={modalStyle}
-            open={isOpen}
+            className="modal"
+            open={useModalStore.getState().isOpen}
         >
             <div className="modalOverlay">
-                <div className={containerStyle}>
+                <div className="modalContainer folderContainer">
                     <div className="modalBar">
                         <div className="modalBarLeft">
                             <Image src={src} alt={alt} />
@@ -41,7 +33,7 @@ export const Modal: React.FC<ModalProps> = ({
                         </div>
                         <div
                             className="close-modal"
-                            onClick={() => onChange(!isOpen)}
+                            // onClick={skillModal.toggleModal}
                         >
                             <Image src={close} width={12} height={12} alt="close-button" />
                         </div>
