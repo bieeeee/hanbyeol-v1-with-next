@@ -1,89 +1,93 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 $xl: 87.5em; // 4k and hi-res desktop
 $lg: 64em; // 1080 and hi-res laptops
 $med: 40em; // hi-res tablets and low-res laptops
 $sm: 28em; // mobile and low-res tablets
 $xs: 20em; // mobile only
 
-:root {
-  --max-width: 1024px;
-
-  --light-slate: #d4d4d4;
-  --dark-navy: #000184;
-
-  --border: 2px solid #5b5b5b;
-  --border-highlight: 2px solid white;
-
-  --fz-xxs: 12px;
-  --fz-xs: 13px;
-  --fz-sm: 14px;
-  --fz-md: 16px;
-  --fz-lg: 18px;
-  --fz-xl: 20px;
-  --fz-xxl: 22px;
+@font-face {
+  font-family: 'neodgm';
+  font-style: normal;
+  src: url('../../public/assets/fonts/neodgm_code.woff2') format('woff2');
 }
 
-html {
-  box-sizing: border-box;
-  width: 100%;
+@font-face {
+  font-family: 'PSN';
+  font-style: normal;
+  src: url('../../public/assets/fonts/px\ sans\ nouveaux.woff2') format('woff2'),
+       url('../../public/assets/fonts/px\ sans\ nouveaux.woff') format('woff');
 }
 
-*,
-*:before,
-*:after {
-  box-sizing: inherit;
+.scrollbar-hide::-webkit-scrollbar {
+  display: none; /* Chrome */
 }
 
-* {
-  ::-webkit-scrollbar {
-    width: 8px;
+.scrollbar-hide {
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
+}
+
+@layer base {
+  :root {
+    --max-width: 1024px;
+  
+    --light-slate: #d4d4d4;
+    --dark-navy: #000184;
+  
+    --border: 2px solid #5b5b5b;
+    --border-highlight: 2px solid white;
+  
+    --fz-xxs: 12px;
+    --fz-xs: 13px;
+    --fz-sm: 14px;
+    --fz-md: 16px;
+    --fz-lg: 18px;
+    --fz-xl: 20px;
+    --fz-xxl: 22px;
+  }
+  
+  html {
+    @apply box-border w-full;
+  }
+  
+  body {
+    @apply h-screen m-0 bg-blue-400 text-xs;
+  }
+  
+  a {
+    @apply text-inherit no-underline;
+  }
+  
+  ul,
+  li {
+    @apply list-none
+  }
+  
+  li::marker {
+    content: "➤  ";
+  }
+  
+  button, input {
+    font-family: inherit;
+  }
+  
+  input {
+    padding: 5px;
   }
 
-  ::-webkit-scrollbar-track {
-    background: var(--dark-navy);
-    border-radius: 0;
-    border: var(--border-highlight);
-  }
-
-  ::-webkit-scrollbar-thumb {
-    background-color: var(--light-slate);
-    border-radius: 0;
-    border: var(--border-highlight)
+  dialog {
+    padding: 0;
+    background: none;
+    border: none;
   }
 }
 
-body {
-  max-width: 100vw;
-  max-height: 100vh;
-  overflow-x: hidden;
-  margin: 0;
-  background-image: linear-gradient(-225deg, #5D9FFF 0%, #B8DCFF 48%, #6BBBFF 100%);
-  font-size: var(--fz-md);
 
-  @media (max-width: 480px) {
-    font-size: var(--fz-sm);
-  }
-}
-
-a {
-  color: inherit;
-  text-decoration: none;
-}
-
-ul,
-li {
-  list-style: none;
-}
-
-li::marker {
-  content: "➤  ";
-}
-
-button, input {
-  font-family: inherit;
-}
-
-input {
-  padding: 5px;
+.main {
+  @apply w-full h-[calc(100vh-41px)] flex-col gap-5 flex-wrap;
 }
 
 .border {
@@ -156,6 +160,28 @@ input {
   }
 }
 
+.modal {
+  width: 100%;
+  height: 100vh;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  position: fixed;
+
+}
+
+.modalOverlay {
+  @extend .modal;
+  background: rgba(49, 49, 49, 0.8);
+}
+.modalContainer {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
 .close-modal {
   @extend .border;
   display: flex;
@@ -182,21 +208,12 @@ input {
 }
 
 
+.icon {
+  @apply w-fit h-fit p-2 flex flex-col justify-center items-center whitespace-nowrap cursor-pointer text-center text-[.5938rem]
+}
 
-.folder {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  white-space: nowrap;
-  gap: 4px;
-  height: fit-content;
-  cursor: pointer;
-
-  p {
-    margin: 0;
-    font-weight: 500;
-  }
+.icon > span {
+  @apply w-fit text-center
 }
 
 .flex {

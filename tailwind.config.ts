@@ -2,15 +2,16 @@ import type { Config } from 'tailwindcss'
 
 const config: Config = {
   content: [
-    './pages/**/*.{js,ts,jsx,tsx,mdx}',
-    './components/**/*.{js,ts,jsx,tsx,mdx}',
-    './app/**/*.{js,ts,jsx,tsx,mdx}',
-    './containers/**/*.{js,ts,jsx,tsx,mdx}'
+    './src/**/*.{js,ts,jsx,tsx,mdx}',
   ],
   theme: {
     extend: {
       screens:{
         'xl':'1440px'
+      },
+      fontFamily: {
+        NEO: ['neodgm', 'sans-serif'],
+        PSN: ['PSN', 'sans-serif']
       },
       colors:{
         'primaryColor':'#518581',
