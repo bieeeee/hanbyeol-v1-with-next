@@ -38,9 +38,7 @@ RUN \
     export S3_MANAGER_KEY=$(cat /run/secrets/S3_MANAGER_KEY) && \
     export S3_MANAGER_SECRET_KEY=$(cat /run/secrets/S3_MANAGER_SECRET_KEY) && \
     export NEXT_PUBLIC_CLOUD_NAME=$(cat /run/secrets/NEXT_PUBLIC_CLOUD_NAME) && \
-    if [ -f package-lock.json ]; then npm run build; \
-    else echo "Lockfile not found." && exit 1; \
-    fi
+    npm run build
 
 # Production image, copy all the files and run next
 FROM base AS runner
