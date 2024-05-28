@@ -23,10 +23,6 @@ jobs:
       - name: "Checkout Code"
         uses: "actions/checkout@v4"
 
-      - name: Set tag
-        id: vars
-        run: echo "::set-output name=rev_sha::$(git rev-parse HEAD)"
-
       - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v4.0.2
         with:
@@ -43,7 +39,7 @@ jobs:
         env:
           ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
           ECR_REPOSITORY: ${{ secrets.ECR_REPOSITORY_NAME }}
-          IMAGE_TAG: ${{ steps.vars.outputs.rev_sha }}
+          IMAGE_TAG: ${{ github.sha }}
         run: |
           docker build -f Dockerfile -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG .
           docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
