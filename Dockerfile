@@ -25,8 +25,7 @@ COPY . .
 # Uncomment the following line in case you want to disable telemetry during the build.
 ENV NEXT_TELEMETRY_DISABLED 1
 
-RUN \
-    --mount=type=secret, id=BUCKET_NAME \
+RUN --mount=type=secret, id=BUCKET_NAME \
     --mount=type=secret, id=BUCKET_REGION \
     --mount=type=secret, id=PROJECT_KEY \
     --mount=type=secret, id=S3_MANAGER_KEY \
