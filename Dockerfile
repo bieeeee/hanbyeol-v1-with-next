@@ -32,7 +32,7 @@ RUN --mount=type=secret,id=BUCKET_NAME \
     --mount=type=secret,id=S3_MANAGER_SECRET_KEY \
     --mount=type=secret,id=NEXT_PUBLIC_CLOUD_NAME \
     export BUCKET_NAME=$(cat /run/secrets/BUCKET_NAME) && \
-    export BUCKER_REGION=$(cat /run/secrets/BUCKER_REGION) && \
+    export BUCKER_REGION=$(cat /run/secrets/BUCKET_REGION) && \
     export PROJECT_KEY=$(cat /run/secrets/PROJECT_KEY) && \
     export S3_MANAGER_KEY=$(cat /run/secrets/S3_MANAGER_KEY) && \
     export S3_MANAGER_SECRET_KEY=$(cat /run/secrets/S3_MANAGER_SECRET_KEY) && \
