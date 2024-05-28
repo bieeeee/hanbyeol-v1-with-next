@@ -23,9 +23,21 @@ COPY . .
 # Next.js collects completely anonymous telemetry data about general usage.
 # Learn more here: https://nextjs.org/telemetry
 # Uncomment the following line in case you want to disable telemetry during the build.
-# ENV NEXT_TELEMETRY_DISABLED 1
+ENV NEXT_TELEMETRY_DISABLED 1
 
 RUN \
+    --mount=type=secret, id=BUCKET_NAME \
+    --mount=type=secret, id=BUCKET_REGION \
+    --mount=type=secret, id=PROJECT_KEY \
+    --mount=type=secret, id=S3_MANAGER_KEY \
+    --mount=type=secret, id=S3_MANAGER_SECRET_KEY \
+    --mount=type=secret, id=NEXT_PUBLIC_CLOUD_NAME \
+    export BUCKET_NAME=$(cat /run/secrets/BUCKET_NAME) && \
+    export BUCKER_REGION=$(cat /run/secrets/BUCKER_REGION) && \
+    export PROJECT_KEY=$(cat /run/secrets/PROJECT_KEY) && \
+    export S3_MANAGER_KEY=$(cat /run/secrets/S3_MANAGER_KEY) && \
+    export S3_MANAGER_SECRET_KEY=$(cat /run/secrets/S3_MANAGER_SECRET_KEY) && \
+    export NEXT_PUBLIC_CLOUD_NAME=$(cat /run/secrets/NEXT_PUBLIC_CLOUD_NAME) && \
     if [ -f package-lock.json ]; then npm run build; \
     else echo "Lockfile not found." && exit 1; \
     fi
@@ -36,7 +48,7 @@ WORKDIR /app
 
 ENV NODE_ENV production
 # Uncomment the following line in case you want to disable telemetry during runtime.
-# ENV NEXT_TELEMETRY_DISABLED 1
+ENV NEXT_TELEMETRY_DISABLED 1
 
 RUN addgroup --system --gid 1001 nodejs
 RUN adduser --system --uid 1001 nextjs
