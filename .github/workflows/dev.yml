@@ -11,6 +11,26 @@ jobs:
       - name: "Checkout Code"
         uses: "actions/checkout@v4"
 
+      - name: Set up QEMU
+        uses: docker/setup-qemu-action@v3
+      
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+      
+      - name: Build
+        uses: docker/build-push-action@v5
+        with:
+          context: .
+          platforms: linux/amd64,linux/arm64
+          tags: user/app:latest
+          secrets: |
+            BUCKET_NAME=${{ secrets.BUCKET_NAME }}
+            BUCKET_REGION=${{ secrets.BUCKET_REGION }}
+            PROJECT_KEY=${{ secrets.PROJECT_KEY }}
+            S3_MANAGER_KEY=${{ secrets.S3_MANAGER_KEY }}
+            S3_MANAGER_SECRET_KEY=${{ secrets.S3_MANAGER_SECRET_KEY }}
+            NEXT_PUBLIC_CLOUD_NAME=${{ secrets.NEXT_PUBLIC_CLOUD_NAME }}  
+
       - name: "Install packages"
         run: |
           npm install
