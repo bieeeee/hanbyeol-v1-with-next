@@ -19,14 +19,6 @@ jobs:
       - name: "Install packages"
         run: |
           npm install
-        #   npm run build
-        # env:
-        #   BUCKET_NAME : ${{ secrets.BUCKET_NAME }}
-        #   BUCKET_REGION : ${{ secrets.BUCKET_REGION }}
-        #   PROJECT_KEY : ${{ secrets.PROJECT_KEY }}
-        #   S3_MANAGER_KEY : ${{ secrets.S3_MANAGER_KEY }}
-        #   S3_MANAGER_SECRET_KEY : ${{ secrets.S3_MANAGER_SECRET_KEY }}
-        #   NEXT_PUBLIC_CLOUD_NAME : ${{ secrets.NEXT_PUBLIC_CLOUD_NAME }}
 
   cd:
     name: "Deployment"
