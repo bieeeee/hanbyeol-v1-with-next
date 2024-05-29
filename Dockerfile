@@ -19,25 +19,6 @@ FROM base AS builder
 WORKDIR /app
 COPY --from=deps /app/node_modules ./node_modules
 COPY . .
-COPY .env ./
-
-# Next.js collects completely anonymous telemetry data about general usage.
-# Learn more here: https://nextjs.org/telemetry
-# Uncomment the following line in case you want to disable telemetry during the build.
-# ENV NEXT_TELEMETRY_DISABLED 1
-
-RUN \
-    if [ -f package-lock.json ]; then npm run build; \
-    else echo "Lockfile not found." && exit 1; \
-    fi
-
-# Production image, copy all the files and run next
-FROM base AS runner
-WORKDIR /app
-
-ENV NODE_ENV production
-# Uncomment the following line in case you want to disable telemetry during runtime.
-# ENV NEXT_TELEMETRY_DISABLED 1
 
 ARG BUCKET_NAME
 ARG BUCKET_REGION
@@ -50,6 +31,27 @@ ENV BUCKET_REGION=$BUCKET_REGION
 ENV S3_MANAGER_KEY=$S3_MANAGER_KEY
 ENV S3_MANAGER_SECRET_KEY=$S3_MANAGER_SECRET_KEY
 ENV NEXT_PUBLIC_CLOUD_NAME=$NEXT_PUBLIC_CLOUD_NAME
+
+# Next.js collects completely anonymous telemetry data about general usage.
+# Learn more here: https://nextjs.org/telemetry
+# Uncomment the following line in case you want to disable telemetry during the build.
+# ENV NEXT_TELEMETRY_DISABLED 1
+
+RUN \
+    BUCKET_NAME=$BUCKET_NAME \
+    BUCKET_REGION=$BUCKET_REGION \
+    S3_MANAGER_KEY=$S3_MANAGER_KEY \
+    S3_MANAGER_SECRET_KEY=$S3_MANAGER_SECRET_KEY \
+    NEXT_PUBLIC_CLOUD_NAME=$NEXT_PUBLIC_CLOUD_NAME \
+    npm run build;
+
+# Production image, copy all the files and run next
+FROM base AS runner
+WORKDIR /app
+
+ENV NODE_ENV production
+# Uncomment the following line in case you want to disable telemetry during runtime.
+# ENV NEXT_TELEMETRY_DISABLED 1
 
 RUN addgroup --system --gid 1001 nodejs
 RUN adduser --system --uid 1001 nextjs
