@@ -60,7 +60,7 @@ jobs:
         uses: aws-actions/amazon-ecr-login@v2
 
       - name: Build Docker image
-        run: \
+        run: |
           docker build --build-arg BUCKET_NAME="${{ env.BUCKET_NAME }}" \
           --build-arg BUCKET_REGION="${{ env.BUCKET_REGION }}" \
           --build-arg PROJECT_KEY="${{ env.PROJECT_KEY }}" \
