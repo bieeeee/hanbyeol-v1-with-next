@@ -23,20 +23,9 @@ COPY . .
 # Next.js collects completely anonymous telemetry data about general usage.
 # Learn more here: https://nextjs.org/telemetry
 # Uncomment the following line in case you want to disable telemetry during the build.
-ENV NEXT_TELEMETRY_DISABLED 1
+# ENV NEXT_TELEMETRY_DISABLED 1
 
-RUN --mount=type=secret,id=BUCKET_NAME \
-    --mount=type=secret,id=BUCKET_REGION \
-    --mount=type=secret,id=PROJECT_KEY \
-    --mount=type=secret,id=S3_MANAGER_KEY \
-    --mount=type=secret,id=S3_MANAGER_SECRET_KEY \
-    --mount=type=secret,id=NEXT_PUBLIC_CLOUD_NAME \
-    export BUCKET_NAME=$(cat /run/secrets/BUCKET_NAME) && \
-    export BUCKET_REGION=$(cat /run/secrets/BUCKET_REGION) && \
-    export PROJECT_KEY=$(cat /run/secrets/PROJECT_KEY) && \
-    export S3_MANAGER_KEY=$(cat /run/secrets/S3_MANAGER_KEY) && \
-    export S3_MANAGER_SECRET_KEY=$(cat /run/secrets/S3_MANAGER_SECRET_KEY) && \
-    export NEXT_PUBLIC_CLOUD_NAME=$(cat /run/secrets/NEXT_PUBLIC_CLOUD_NAME) && \
+RUN \
     if [ -f package-lock.json ]; then npm run build; \
     else echo "Lockfile not found." && exit 1; \
     fi
@@ -47,7 +36,19 @@ WORKDIR /app
 
 ENV NODE_ENV production
 # Uncomment the following line in case you want to disable telemetry during runtime.
-ENV NEXT_TELEMETRY_DISABLED 1
+# ENV NEXT_TELEMETRY_DISABLED 1
+
+ARG BUCKET_NAME
+ARG BUCKET_REGION
+ARG PROJECT_KEY
+ARG S3_MANAGER_KEY
+ARG S3_MANAGER_SECRET_KEY
+ARG NEXT_PUBLIC_CLOUD_NAME
+ENV BUCKET_NAME=$BUCKET_NAME
+ENV BUCKET_REGION=$BUCKET_REGION
+ENV S3_MANAGER_KEY=$S3_MANAGER_KEY
+ENV S3_MANAGER_SECRET_KEY=$S3_MANAGER_SECRET_KEY
+ENV NEXT_PUBLIC_CLOUD_NAME=$NEXT_PUBLIC_CLOUD_NAME
 
 RUN addgroup --system --gid 1001 nodejs
 RUN adduser --system --uid 1001 nextjs
@@ -64,7 +65,6 @@ COPY --from=builder --chown=nextjs:nodejs /app/.next/standalone ./
 COPY --from=builder --chown=nextjs:nodejs /app/.next/static ./.next/static
 
 USER nextjs
-
 
 EXPOSE 3000
 
