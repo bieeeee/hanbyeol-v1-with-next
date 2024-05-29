@@ -40,9 +40,13 @@ jobs:
       S3_MANAGER_KEY : ${{ secrets.S3_MANAGER_KEY }}
       S3_MANAGER_SECRET_KEY : ${{ secrets.S3_MANAGER_SECRET_KEY }}
       NEXT_PUBLIC_CLOUD_NAME : ${{ secrets.NEXT_PUBLIC_CLOUD_NAME }}
+
     steps:
       - name: "Checkout Code"
         uses: "actions/checkout@v4"
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
 
       - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v4.0.2
@@ -55,13 +59,8 @@ jobs:
         id: login-ecr
         uses: aws-actions/amazon-ecr-login@v2
 
-      - name: Build, tag, and push image to Amazon ECR
-        id: build-image
-        env:
-          ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
-          ECR_REPOSITORY: ${{ secrets.ECR_REPOSITORY_NAME }}
-          IMAGE_TAG: ${{ github.sha }}
-        run: |
+      - name: Build Docker image
+        run: \
           docker build --build-arg BUCKET_NAME="${{ env.BUCKET_NAME }}" \
           --build-arg BUCKET_REGION="${{ env.BUCKET_REGION }}" \
           --build-arg PROJECT_KEY="${{ env.PROJECT_KEY }}" \
@@ -69,4 +68,12 @@ jobs:
           --build-arg S3_MANAGER_SECRET_KEY="${{ env.S3_MANAGER_SECRET_KEY }}" \
           --build-arg NEXT_PUBLIC_CLOUD_NAME="${{ env.NEXT_PUBLIC_CLOUD_NAME }}" \
           -f Dockerfile -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG .
+
+      - name: Tag, and push image to Amazon ECR
+        id: build-image
+        env:
+          ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
+          ECR_REPOSITORY: ${{ secrets.ECR_REPOSITORY_NAME }}
+          IMAGE_TAG: ${{ github.sha }}
+        run: |
           docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
